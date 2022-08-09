@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "picnicking",
+  "version": "${version}",
+  "name": "Picnicking",
+  "description": "Adds various picnic related features, focused on aiding exploration and cozy vibes",
+  "authors": [
+    "DenimRed"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+  "license": "LGPLv3",
+  "icon": "assets/picnicking/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.denimred.picnicking.fabric.PicnickingFabric"
+    ]
+  },
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.18.2",
+    "architectury": ">=4.8.79"
+  }
+}

@@ -1,0 +1,33 @@
+modLoader = "javafml"
+loaderVersion = "[40,)"
+issueTrackerURL = "https://github.com/DenimsMods/Picnicking/issues"
+license = "LGPLv3"
+
+[[mods]]
+modId = "picnicking"
+version = "${version}"
+displayName = "Picnicking"
+authors = "DenimRed"
+description = "Adds various picnic related features, focused on aiding exploration and cozy vibes"
+#logoFile = ""
+
+[[dependencies.picnicking]]
+modId = "forge"
+mandatory = true
+versionRange = "[40,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.picnicking]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18.2,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.picnicking]]
+modId = "architectury"
+mandatory = true
+versionRange = "[4.8.79,)"
+ordering = "AFTER"
+side = "BOTH"
