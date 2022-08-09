@@ -5,8 +5,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.ParametersAreNonnullByDefault;
+
 import static dev.denimred.picnicking.Picnicking.MOD_ID;
 
+@ParametersAreNonnullByDefault
 public abstract class ChargeableItem extends Item {
     public static final String TAG_CHARGE = "Charge";
 
@@ -16,7 +19,7 @@ public abstract class ChargeableItem extends Item {
 
     // ******************** NBT/STORAGE ********************
 
-    abstract public int getMaxCharges(ItemStack stack);
+    abstract public int getMaxCharge(ItemStack stack);
 
     public void reduceCharge(ItemStack stack) {
         modifyCharge(stack, -1);
@@ -56,8 +59,12 @@ public abstract class ChargeableItem extends Item {
         return clampCharge(stack, storedCharge);
     }
 
+    public boolean isFullyCharged(ItemStack stack) {
+        return getCharge(stack) >= getMaxCharge(stack);
+    }
+
     public int clampCharge(ItemStack stack, int charge) {
-        return Mth.clamp(charge, 0, getMaxCharges(stack));
+        return Mth.clamp(charge, 0, getMaxCharge(stack));
     }
 
     // ******************** ITEM USAGE ********************
@@ -79,6 +86,6 @@ public abstract class ChargeableItem extends Item {
     public int getBarWidth(ItemStack stack) {
         CompoundTag tag = stack.getTagElement(MOD_ID);
         if (tag == null) return 1;
-        return Math.round((float) tag.getInt(TAG_CHARGE) / (float) getMaxCharges(stack) * 13.0f);
+        return Math.round((float) tag.getInt(TAG_CHARGE) / (float) getMaxCharge(stack) * 13.0f);
     }
 }

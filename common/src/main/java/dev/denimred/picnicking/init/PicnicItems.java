@@ -2,7 +2,7 @@ package dev.denimred.picnicking.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import dev.denimred.picnicking.item.ThermosItem;
+import dev.denimred.picnicking.thermos.ThermosItem;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -41,6 +41,8 @@ public final class PicnicItems {
 
     public static final class Tags {
         public static final TagKey<Item> THERMOS_DRINKABLES = create("thermos_drinkables");
+        public static final TagKey<Item> WOODEN_BOWL_REMAINDERS = create("wooden_bowl_remainders");
+        public static final TagKey<Item> GLASS_BOTTLE_REMAINDERS = create("glass_bottle_remainders");
 
 
         public static TagKey<Item> create(String name) {

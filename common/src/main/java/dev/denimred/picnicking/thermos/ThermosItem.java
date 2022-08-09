@@ -1,6 +1,7 @@
-package dev.denimred.picnicking.item;
+package dev.denimred.picnicking.thermos;
 
 import dev.denimred.picnicking.init.PicnicItems;
+import dev.denimred.picnicking.item.ChargeableItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Holder;
@@ -39,7 +40,7 @@ import static net.minecraft.nbt.Tag.TAG_COMPOUND;
 @ParametersAreNonnullByDefault
 public class ThermosItem extends ChargeableItem {
     public static final String TAG_DRINK = "Drink";
-    public static final int MAX_CHARGES = 8;
+    public static final int MAX_CHARGES = 16;
 
     public ThermosItem() {
         this(PicnicItems.properties().stacksTo(1));
@@ -69,7 +70,7 @@ public class ThermosItem extends ChargeableItem {
     }
 
     @Override
-    public int getMaxCharges(ItemStack stack) {
+    public int getMaxCharge(ItemStack stack) {
         return MAX_CHARGES;
     }
 
@@ -94,11 +95,11 @@ public class ThermosItem extends ChargeableItem {
                     if (potion == Potions.EMPTY) continue;
                     ItemStack thermos = getDefaultInstance();
                     ItemStack drink = PotionUtils.setPotion(new ItemStack(drinkable), potion);
-                    items.add(fillWithDrink(thermos, drink, getMaxCharges(thermos)));
+                    items.add(fillWithDrink(thermos, drink, getMaxCharge(thermos)));
                 }
             } else {
                 ItemStack thermos = getDefaultInstance();
-                items.add(fillWithDrink(thermos, drinkable.getDefaultInstance(), getMaxCharges(thermos)));
+                items.add(fillWithDrink(thermos, drinkable.getDefaultInstance(), getMaxCharge(thermos)));
             }
         }
     }
@@ -171,6 +172,7 @@ public class ThermosItem extends ChargeableItem {
         if (drink.is(Items.RABBIT_STEW)) return 0xE29C4A;
         if (drink.is(Items.SUSPICIOUS_STEW)) return 0xA8D475;
         if (drink.is(Items.BEETROOT_SOUP)) return 0xB82A30;
+        if (drink.is(Items.HONEY_BOTTLE)) return 0xFFD32D;
         // Use potion color if available (will fall back to a pink invalid color)
         // TODO: Make the default thermos bar color different so new items don't give a hideous color
         return PotionUtils.getColor(drink);
@@ -193,7 +195,7 @@ public class ThermosItem extends ChargeableItem {
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
         ItemStack drink = getDrink(stack);
         if (drink.isEmpty()) return;
-        tooltip.add(drink.getHoverName().copy().withStyle(ChatFormatting.GRAY));
+        tooltip.add(drink.getHoverName().copy().append(" (%s/%s)".formatted(getCharge(stack), getMaxCharge(stack))).withStyle(ChatFormatting.GRAY));
         drink.getItem().appendHoverText(drink, level, tooltip, flag);
     }
 }

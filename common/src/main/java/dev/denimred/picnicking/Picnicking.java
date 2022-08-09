@@ -3,6 +3,7 @@ package dev.denimred.picnicking;
 import dev.architectury.registry.CreativeTabRegistry;
 import dev.denimred.picnicking.init.PicnicBlocks;
 import dev.denimred.picnicking.init.PicnicItems;
+import dev.denimred.picnicking.init.PicnicRecipes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -16,6 +17,7 @@ public class Picnicking {
     public static void init() {
         PicnicBlocks.REGISTRY.register();
         PicnicItems.REGISTRY.register();
+        PicnicRecipes.Serializers.REGISTRY.register();
     }
 
     public static ResourceLocation res(String path) {
