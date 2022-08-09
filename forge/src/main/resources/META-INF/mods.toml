@@ -9,7 +9,7 @@ version = "${version}"
 displayName = "Picnicking"
 authors = "DenimRed"
 description = "Adds various picnic related features, focused on aiding exploration and cozy vibes"
-#logoFile = ""
+logoFile = "picnicking.png"
 
 [[dependencies.picnicking]]
 modId = "forge"
