@@ -17,6 +17,9 @@
   "entrypoints": {
     "main": [
       "dev.denimred.picnicking.fabric.PicnickingFabric"
+    ],
+    "client": [
+      "dev.denimred.picnicking.fabric.client.PicnickingFabricClient"
     ]
   },
   "depends": {

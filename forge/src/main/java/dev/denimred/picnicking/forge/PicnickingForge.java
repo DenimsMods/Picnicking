@@ -8,7 +8,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import static dev.denimred.picnicking.Picnicking.MOD_ID;
 
 @Mod(MOD_ID)
-public class PicnickingForge {
+public final class PicnickingForge {
     public PicnickingForge() {
         EventBuses.registerModEventBus(MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
         Picnicking.init();

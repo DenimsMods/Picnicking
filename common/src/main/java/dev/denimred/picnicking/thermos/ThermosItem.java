@@ -1,7 +1,7 @@
 package dev.denimred.picnicking.thermos;
 
 import dev.denimred.picnicking.init.PicnicItems;
-import dev.denimred.picnicking.item.ChargeableItem;
+import dev.denimred.picnicking.util.item.ChargeableItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.Holder;
@@ -31,7 +31,6 @@ import static dev.denimred.picnicking.Picnicking.MOD_ID;
 import static dev.denimred.picnicking.init.PicnicItems.Tags.THERMOS_DRINKABLES;
 import static net.minecraft.nbt.Tag.TAG_COMPOUND;
 
-// TODO: Add recipes for thermos
 // TODO: Add multiple color options for the thermos
 // TODO: Allow multiple drinks to be stored in the thermos
 // TODO: Add a "chug" mode to the thermos

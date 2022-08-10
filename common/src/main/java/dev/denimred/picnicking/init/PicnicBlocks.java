@@ -2,7 +2,7 @@ package dev.denimred.picnicking.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import dev.denimred.picnicking.block.PicnicBlanketBlock;
+import dev.denimred.picnicking.blanket.PicnicBlanketBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 

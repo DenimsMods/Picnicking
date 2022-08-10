@@ -1,4 +1,4 @@
-package dev.denimred.picnicking.item;
+package dev.denimred.picnicking.util.item;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;

@@ -15,7 +15,7 @@ Picnicking is all about picnics! Goals for this mod include:
 
 - [ ] Picnic baskets and blankets! Many different colors to suit your tastes.
   - [ ] Baskets can store items just like a shulker box, allowing for simple portable storage.
-  - [ ] Blankets can be sat on, as they should be!
+  - [x] Blankets can be sat on, as they should be!
 - [ ] Hammocks! So cozy you can even fall asleep during the day!
 - [x] Thermoses! Store a bunch of soup, milk, or even potions inside this handy drinking container!
 - [ ] Picnic tables! Not everyone enjoys sitting on the ground after all!
