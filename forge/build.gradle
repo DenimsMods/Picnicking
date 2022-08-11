@@ -14,6 +14,9 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
+        mixinConfig "picnicking-common.mixins.json"
+        mixinConfig "picnicking.mixins.json"
+
         // TODO: Figure out datagen (change forge datagen output directory somehow)
 //        dataGen {
 //            mod "picnicking"

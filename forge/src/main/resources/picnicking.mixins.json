@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "dev.denimred.picnicking.forge.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+  ],
+  "mixins": [
+    "CrownItemMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

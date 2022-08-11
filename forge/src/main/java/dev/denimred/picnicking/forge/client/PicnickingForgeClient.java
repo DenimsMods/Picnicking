@@ -15,4 +15,9 @@ public final class PicnickingForgeClient {
     public static void onRegisterEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         PicnicRenderers.registerEntityRenderers();
     }
+
+    @SubscribeEvent
+    public static void onRegisterEntityLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        PicnicRenderers.registerModelLayers();
+    }
 }
