@@ -17,9 +17,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 
@@ -88,18 +86,9 @@ public class ThermosItem extends ChargeableItem {
         if (!allowdedIn(tab)) return;
         items.add(getDefaultInstance());
         for (Holder<Item> holder : Registry.ITEM.getTagOrEmpty(THERMOS_DRINKABLES)) {
-            Item drinkable = holder.value();
-            if (drinkable instanceof PotionItem) {
-                for (Potion potion : Registry.POTION) {
-                    if (potion == Potions.EMPTY) continue;
-                    ItemStack thermos = getDefaultInstance();
-                    ItemStack drink = PotionUtils.setPotion(new ItemStack(drinkable), potion);
-                    items.add(fillWithDrink(thermos, drink, getMaxCharge(thermos)));
-                }
-            } else {
-                ItemStack thermos = getDefaultInstance();
-                items.add(fillWithDrink(thermos, drinkable.getDefaultInstance(), getMaxCharge(thermos)));
-            }
+            ItemStack drinkable = holder.value().getDefaultInstance();
+            ItemStack thermos = getDefaultInstance();
+            items.add(fillWithDrink(thermos, drinkable, getMaxCharge(thermos)));
         }
     }
 
