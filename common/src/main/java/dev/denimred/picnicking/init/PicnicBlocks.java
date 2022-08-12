@@ -2,7 +2,7 @@ package dev.denimred.picnicking.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
-import dev.denimred.picnicking.blanket.PicnicBlanketBlock;
+import dev.denimred.picnicking.blanket.BlanketBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 
@@ -16,7 +16,7 @@ public final class PicnicBlocks {
     public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(MOD_ID, BLOCK_REGISTRY);
 
 
-    public static final RegistrySupplier<PicnicBlanketBlock> PICNIC_BLANKET = register("picnic_blanket", PicnicBlanketBlock::new);
+    public static final RegistrySupplier<BlanketBlock> PICNIC_BLANKET = register("picnic_blanket", BlanketBlock::new);
 
 
     public static <T extends Block> RegistrySupplier<T> register(String name, Supplier<? extends T> sup) {

@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "picnicking:crafting_shaped_locked",
   "pattern": [
     "NNN",
     "III"

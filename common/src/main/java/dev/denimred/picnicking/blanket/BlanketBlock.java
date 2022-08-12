@@ -14,12 +14,12 @@ import net.minecraft.world.phys.BlockHitResult;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
-public class PicnicBlanketBlock extends CarpetBlock {
-    public PicnicBlanketBlock() {
+public class BlanketBlock extends CarpetBlock {
+    public BlanketBlock() {
         this(Properties.copy(Blocks.RED_CARPET));
     }
 
-    public PicnicBlanketBlock(Properties properties) {
+    public BlanketBlock(Properties properties) {
         super(properties);
     }
 
@@ -36,7 +36,7 @@ public class PicnicBlanketBlock extends CarpetBlock {
         BlockPos above = pos.above();
         if (level.getBlockState(above).isSuffocating(level, above)) return InteractionResult.PASS;
         // Summon and seat the passenger
-        PicnicBlanketEntity.summonAndSeat(level, hit.getLocation(), player);
+        BlanketEntity.summonAndSeat(level, hit.getLocation(), player);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
 }

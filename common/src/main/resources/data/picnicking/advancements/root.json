@@ -1,0 +1,36 @@
+{
+  "display": {
+    "icon": {
+      "item": "picnicking:picnic_king_crown"
+    },
+    "title": {
+      "text": "Picnic King"
+    },
+    "description": {
+      "text": "The monarch has risen!"
+    },
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false,
+    "background": "picnicking:textures/gui/advancements/background.png"
+  },
+  "criteria": {
+    "impossible": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "requirements": [
+    [
+      "impossible"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "picnicking:picnic_king_crown"
+    ],
+    "loot": [
+      "picnicking:picnic_king_reward"
+    ]
+  }
+}

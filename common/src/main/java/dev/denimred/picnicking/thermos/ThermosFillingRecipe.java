@@ -116,7 +116,7 @@ public class ThermosFillingRecipe extends CustomRecipe {
         NonNullList<ItemStack> remainders = NonNullList.withSize(container.getContainerSize(), ItemStack.EMPTY);
         boolean[] unusedSlots = getUnusedSlots(container);
 
-        for(int i = 0; i < remainders.size(); ++i) {
+        for (int i = 0; i < remainders.size(); ++i) {
             ItemStack stack = container.getItem(i);
             if (unusedSlots[i]) {
                 // Have to make a copy here since the original stack gets decremented

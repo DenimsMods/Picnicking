@@ -3,5 +3,8 @@
   "item.picnicking.thermos": "Thermos",
   "item.picnicking.thermos.empty": "Empty Thermos",
   "item.picnicking.picnic_king_crown": "Picnic King Crown",
+  "item.picnicking.picnic_king_crown.desc": "Baskets rejoice!",
+  "item.picnicking.picnic_king_crown.inert": "Tiny Crown",
+  "item.picnicking.picnic_king_crown.inert.desc": "Feels incomplete...",
   "itemGroup.picnicking.general": "Picnicking"
 }

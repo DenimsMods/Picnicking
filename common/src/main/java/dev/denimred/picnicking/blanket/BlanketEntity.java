@@ -20,13 +20,13 @@ import java.util.Optional;
 // TODO: Add recipe for blanket
 // TODO: Let players dismount blanket by moving/jumping as well as sneaking?
 @ParametersAreNonnullByDefault
-public class PicnicBlanketEntity extends Entity {
-    public PicnicBlanketEntity(EntityType<?> entityType, Level level) {
+public class BlanketEntity extends Entity {
+    public BlanketEntity(EntityType<?> entityType, Level level) {
         super(entityType, level);
     }
 
-    public static EntityType.Builder<PicnicBlanketEntity> createType() {
-        return EntityType.Builder.of(PicnicBlanketEntity::new, MobCategory.MISC)
+    public static EntityType.Builder<BlanketEntity> createType() {
+        return EntityType.Builder.of(BlanketEntity::new, MobCategory.MISC)
                 .fireImmune()
                 .noSummon()
                 .updateInterval(Integer.MAX_VALUE)
@@ -50,7 +50,7 @@ public class PicnicBlanketEntity extends Entity {
         // Do some quick collision checks and adjustments to try and get a safe seat position
         Vec3 safePos = getSafeSeatPosition(level, pos, passenger);
         // Create and summon the blanket entity
-        PicnicBlanketEntity blanketEntity = PicnicEntityTypes.PICNIC_BLANKET.get().create(level);
+        BlanketEntity blanketEntity = PicnicEntityTypes.PICNIC_BLANKET.get().create(level);
         if (blanketEntity == null) return;
         blanketEntity.noPhysics = true;
         blanketEntity.setPos(safePos);
@@ -64,7 +64,7 @@ public class PicnicBlanketEntity extends Entity {
     public void tick() {
         if (level.isClientSide) return;
         Block block = level.getBlockState(blockPosition()).getBlock();
-        if (block instanceof PicnicBlanketBlock && isVehicle()) return;
+        if (block instanceof BlanketBlock && isVehicle()) return;
         discard();
     }
 

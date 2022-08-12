@@ -27,7 +27,8 @@ public class CrownModel extends HumanoidModel<LivingEntity> {
     }
 
     public static CrownModel getInstance() {
-        if (instance == null) instance = new CrownModel(Minecraft.getInstance().getEntityModels().bakeLayer(MODEL_LAYER));
+        if (instance == null)
+            instance = new CrownModel(Minecraft.getInstance().getEntityModels().bakeLayer(MODEL_LAYER));
         return instance;
     }
 
