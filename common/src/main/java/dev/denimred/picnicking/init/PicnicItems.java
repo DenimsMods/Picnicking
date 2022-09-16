@@ -2,6 +2,7 @@ package dev.denimred.picnicking.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import dev.denimred.picnicking.basket.BasketItem;
 import dev.denimred.picnicking.crown.CrownItem;
 import dev.denimred.picnicking.thermos.ThermosItem;
 import net.minecraft.tags.TagKey;
@@ -20,6 +21,7 @@ public final class PicnicItems {
 
 
     public static final RegistrySupplier<ThermosItem> THERMOS = register("thermos", ThermosItem::new);
+    public static final RegistrySupplier<BasketItem> PICNIC_BASKET = register("picnic_basket", BasketItem::new);
     public static final RegistrySupplier<CrownItem> PICNIC_KING_CROWN = register("picnic_king_crown", CrownItem::new);
 
 

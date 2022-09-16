@@ -4,11 +4,13 @@
   "package": "dev.denimred.picnicking.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
+    "client.EntityRenderDispatcherAccessor"
   ],
   "mixins": [
     "CraftingContainerAccessor",
     "CraftingMenuAccessor",
-    "InventoryMenuAccessor"
+    "InventoryMenuAccessor",
+    "SimpleContainerAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -6,7 +6,8 @@
   "client": [
   ],
   "mixins": [
-    "CrownItemMixin"
+    "CrownItemMixin",
+    "BasketItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

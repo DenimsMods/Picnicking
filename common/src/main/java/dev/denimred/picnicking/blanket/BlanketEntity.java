@@ -33,17 +33,6 @@ public class BlanketEntity extends Entity {
                 .sized(0.25f, 0.25f);
     }
 
-    public static Vec3 getSafeSeatPosition(Level level, Vec3 pos, Entity passenger) {
-        EntityDimensions dimensions = passenger.getDimensions(Pose.STANDING);
-        double width = dimensions.width;
-        double height = dimensions.height;
-        double adjustedWidth = Math.max(0.0F, width) + 1.0E-6;
-        double adjustedHeight = Math.max(0.0F, height) + 1.0E-6;
-        VoxelShape voxelShape = Shapes.create(AABB.ofSize(pos, adjustedWidth, adjustedHeight, adjustedWidth));
-        Optional<Vec3> freePos = level.findFreePosition(passenger, voxelShape, pos, width, height, width).map(v -> new Vec3(v.x, pos.y, v.z));
-        return freePos.orElse(pos);
-    }
-
     public static void summonAndSeat(Level level, Vec3 pos, Entity passenger) {
         // Cannot summon on clients
         if (level.isClientSide) return;
@@ -58,6 +47,17 @@ public class BlanketEntity extends Entity {
         // Seat the passenger
         passenger.startRiding(blanketEntity, true);
         if (passenger instanceof TamableAnimal animal) animal.setInSittingPose(true);
+    }
+
+    public static Vec3 getSafeSeatPosition(Level level, Vec3 pos, Entity passenger) {
+        EntityDimensions dimensions = passenger.getDimensions(Pose.STANDING);
+        double width = dimensions.width;
+        double height = dimensions.height;
+        double adjustedWidth = Math.max(0.0F, width) + 1.0E-6;
+        double adjustedHeight = Math.max(0.0F, height) + 1.0E-6;
+        VoxelShape voxelShape = Shapes.create(AABB.ofSize(pos, adjustedWidth, adjustedHeight, adjustedWidth));
+        Optional<Vec3> freePos = level.findFreePosition(passenger, voxelShape, pos, width, height, width).map(v -> new Vec3(v.x, pos.y, v.z));
+        return freePos.orElse(pos);
     }
 
     @Override

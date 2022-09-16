@@ -22,13 +22,16 @@ public class CrownModel extends HumanoidModel<LivingEntity> {
     public static final ResourceLocation TEXTURE = res("textures/models/armor/picnic_king_crown.png");
     private static CrownModel instance = null;
 
-    private CrownModel(ModelPart modelPart) {
+    public CrownModel() {
+        this(Minecraft.getInstance().getEntityModels().bakeLayer(MODEL_LAYER));
+    }
+
+    public CrownModel(ModelPart modelPart) {
         super(modelPart, RenderType::armorCutoutNoCull);
     }
 
     public static CrownModel getInstance() {
-        if (instance == null)
-            instance = new CrownModel(Minecraft.getInstance().getEntityModels().bakeLayer(MODEL_LAYER));
+        if (instance == null) instance = new CrownModel();
         return instance;
     }
 
@@ -36,7 +39,7 @@ public class CrownModel extends HumanoidModel<LivingEntity> {
         MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
         PartDefinition root = mesh.getRoot();
         root.addOrReplaceChild("head", CubeListBuilder.create(), PartPose.ZERO).addOrReplaceChild("crown",
-                CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 2.0F, 3.0F, CubeDeformation.NONE),
+                CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.0F, -1.5F, 3.0F, 2.0F, 3.0F),
                 PartPose.offsetAndRotation(0.0F, -9.0F, 0.0F, 0.0F, -0.7854F, 0.0F));
         return LayerDefinition.create(mesh, 16, 8);
     }

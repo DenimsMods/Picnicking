@@ -20,7 +20,6 @@ public final class PicnicRecipes {
 
         public static final RegistrySupplier<SimpleRecipeSerializer<ThermosFillingRecipe>> THERMOS_FILLING =
                 register("crafting_special_thermosfilling", () -> new SimpleRecipeSerializer<>(ThermosFillingRecipe::new));
-
         public static final RegistrySupplier<LockedShapedRecipe.Serializer> CRAFTING_SHAPED_LOCKED =
                 register("crafting_shaped_locked", LockedShapedRecipe.Serializer::new);
 

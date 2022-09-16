@@ -2,6 +2,7 @@ package dev.denimred.picnicking.init;
 
 import dev.architectury.registry.registries.DeferredRegister;
 import dev.architectury.registry.registries.RegistrySupplier;
+import dev.denimred.picnicking.basket.BasketEntity;
 import dev.denimred.picnicking.blanket.BlanketEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -17,6 +18,7 @@ public final class PicnicEntityTypes {
 
 
     public static final RegistrySupplier<EntityType<BlanketEntity>> PICNIC_BLANKET = register("picnic_blanket", BlanketEntity::createType);
+    public static final RegistrySupplier<EntityType<BasketEntity>> PICNIC_BASKET = register("picnic_basket", BasketEntity::createType);
 
 
     public static <E extends Entity, B extends EntityType.Builder<E>> RegistrySupplier<EntityType<E>> register(String name, Supplier<? extends B> sup) {

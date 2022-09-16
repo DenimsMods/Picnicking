@@ -5,7 +5,7 @@ import dev.denimred.picnicking.init.PicnicRecipes;
 import dev.denimred.picnicking.mixin.CraftingContainerAccessor;
 import dev.denimred.picnicking.mixin.CraftingMenuAccessor;
 import dev.denimred.picnicking.mixin.InventoryMenuAccessor;
-import net.minecraft.client.player.LocalPlayer;
+import dev.denimred.picnicking.util.client.ClientBits;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -54,7 +54,7 @@ public class LockedShapedRecipe extends ShapedRecipe {
 
     public RecipeBook getRecipeBook(Level level, Player player) {
         return level.isClientSide
-                ? ((LocalPlayer) player).getRecipeBook()
+                ? ClientBits.getClientRecipeBook(player)
                 : ((ServerPlayer) player).getRecipeBook();
     }
 

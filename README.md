@@ -11,15 +11,38 @@ Active development of the project is ongoing. **If you wish to play with the mod
 The alpha release may contain numerous bugs and oversights, and will not be considered feature-complete until it hits beta.
 
 ## What it's about
-Picnicking is all about picnics! Goals for this mod include:
+Picnicking is all about picnics! Here's a list of all the mod's planned features so far:
 
 - [ ] Picnic baskets and blankets! Many different colors to suit your tastes.
-  - [ ] Baskets can store items just like a shulker box, allowing for simple portable storage.
+  - [x] Baskets can store items just like a shulker box, allowing for simple portable storage.
+    - Baskets use boat physics; they float when in water, but will sink if sufficiently submerged.
+    - Baskets are entities, but do not take fall damage or drown/suffocate. They do, however, take double fire/lava damage.
+    - When a basket is destroyed, it will turn into an item but keep its contents.
+    - When a basket is destroyed *in item form*, it will drop its contents on the ground.
+    - Baskets have the following left/right click interactions:
+      - Right-click: Opens the basket's inventory
+        - While sneaking with an empty hand: Picks up the basket (keeps its items)
+      - Left-click: Damages the basket (keeps its items when broken)
+        - While sneaking with an empty hand: Flips the basket's handles up/down (purely cosmetic)
   - [x] Blankets can be sat on, as they should be!
+  - [ ] When a full picnic is formed, the basket will provide buffs to nearby players sitting on blankets.
+    - Pets count as picnic members too, allowing for singleplayer functionality. However, only pets that can sit on the blankets (wolves, cats, etc.) will work.
 - [ ] Hammocks! So cozy you can even fall asleep during the day!
+  - The behavior of hammocks is configurable. By default, you can use them to skip through both the day and the night, but they will not set your spawn point. 
+  - Hammocks are three blocks long, and can either be hung from other blocks or placed on their own.
+  - Carpets/blankets can be placed on hammocks to make them cozier!
 - [x] Thermoses! Store a bunch of soup, milk, or even potions inside this handy drinking container!
+  - Thermoses use item tags to define their behavior, with some special cases programmed to improve functionality.
+    - The `picnicking:thermos_drinkables` tag lists all the items that can be placed in a thermos.
+      - You can add whatever you want, and the thermos will apply its food value and potion effects when used. Mods that add extra special behaviors to items when eaten may not function.
+    - The `picnicking:glass_bottle_remainders` tag lists items that should return a glass bottle when used to fill the thermos (required for potions to not destroy their bottle when crafting).
+    - The `picnicking:wooden_bowl_remainders` tag lists items that should return a wooden bowl when used to fill the thermos (required for soups/stews to not destroy their bowl when crafting).
 - [ ] Picnic tables! Not everyone enjoys sitting on the ground after all!
+  - Picnic blankets can be placed on them to act as tablecloths.
+  - A single table sits up to 4 players. The block itself takes up a 2x2 space.
 - [ ] Bug spray! Keeps pesky insects at bay!
   - [ ] Includes a potion variant to keep you protected even when they sneak up on you!
 
 And plenty more! Picnicking is still in active development so these goals may change, but hopefully that gives you an idea of what to expect!
+
+Note that all features that *don't* have a checkmark are still being designed and may change once added. 

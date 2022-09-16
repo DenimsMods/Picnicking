@@ -13,6 +13,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+// TODO: Add variants? (16 colors)
 @ParametersAreNonnullByDefault
 public class BlanketBlock extends CarpetBlock {
     public BlanketBlock() {
@@ -28,14 +29,14 @@ public class BlanketBlock extends CarpetBlock {
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         // Standard shift-click use override
         if (player.isShiftKeyDown()) return InteractionResult.PASS;
-        // Don't sit if already sitting (helps avoid mis-clicks causing you to chance spot)
+        // Don't sit if already sitting (helps avoid mis-clicks causing you to change spot)
         if (player.isPassenger()) return InteractionResult.PASS;
         // Only allow sitting when interacting with the top
         if (hit.getDirection() != Direction.UP) return InteractionResult.PASS;
         // Prevent passenger from potentially suffocating
         BlockPos above = pos.above();
         if (level.getBlockState(above).isSuffocating(level, above)) return InteractionResult.PASS;
-        // Summon and seat the passenger
+        // Summon the entity and seat the passenger
         BlanketEntity.summonAndSeat(level, hit.getLocation(), player);
         return InteractionResult.sidedSuccess(level.isClientSide);
     }
