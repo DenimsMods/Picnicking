@@ -3,7 +3,6 @@ package dev.denimred.picnicking.basket.client;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
-import dev.denimred.picnicking.Picnicking;
 import dev.denimred.picnicking.basket.BasketEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -15,12 +14,12 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 @ParametersAreNonnullByDefault
 public class BasketEntityRenderer extends EntityRenderer<BasketEntity> {
-    private static final ResourceLocation TEXTURE = Picnicking.res("textures/entity/picnic_basket.png");
     private final BasketModel<BasketEntity> model;
 
     public BasketEntityRenderer(EntityRendererProvider.Context context) {
         super(context);
         model = new BasketModel<>(context.bakeLayer(BasketModel.MODEL_LAYER));
+        shadowRadius = 0.0F;
     }
 
     @Override
@@ -40,6 +39,6 @@ public class BasketEntityRenderer extends EntityRenderer<BasketEntity> {
 
     @Override
     public ResourceLocation getTextureLocation(BasketEntity entity) {
-        return TEXTURE;
+        return model.getTextureLocation(entity);
     }
 }

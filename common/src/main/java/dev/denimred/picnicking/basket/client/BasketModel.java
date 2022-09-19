@@ -6,8 +6,6 @@ import dev.denimred.picnicking.basket.BasketEntity;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
-import net.minecraft.client.model.geom.PartPose;
-import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
@@ -18,6 +16,8 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import java.util.function.Function;
 
 import static dev.denimred.picnicking.Picnicking.res;
+import static net.minecraft.client.model.geom.PartPose.offset;
+import static net.minecraft.client.model.geom.builders.CubeListBuilder.create;
 
 @ParametersAreNonnullByDefault
 public class BasketModel<E extends BasketEntity> extends EntityModel<E> {
@@ -30,7 +30,7 @@ public class BasketModel<E extends BasketEntity> extends EntityModel<E> {
     protected final ModelPart frontHandle;
 
     public BasketModel(ModelPart root) {
-        this(root, RenderType::entityCutout);
+        this(root, RenderType::entityCutoutNoCull);
     }
 
     public BasketModel(ModelPart root, Function<ResourceLocation, RenderType> renderType) {
@@ -46,19 +46,27 @@ public class BasketModel<E extends BasketEntity> extends EntityModel<E> {
         MeshDefinition mesh = new MeshDefinition();
         PartDefinition root = mesh.getRoot();
 
-        PartDefinition base = root.addOrReplaceChild("base", CubeListBuilder.create().texOffs(0, 0).addBox(-5.0F, -7.0F, -7.0F, 10.0F, 7.0F, 14.0F), PartPose.offset(0.0F, 24.0F, 0.0F));
+        //@formatter:off
+        PartDefinition base = root.addOrReplaceChild("base", create()
+                .texOffs(0, 18).addBox("outer", -5.0F, -7.0F, -7.0F, 10.0F, 7.0F, 14.0F)
+                .texOffs(5, 0).addBox("inner", -4.0F, -7.0F, -6.0F, 8.0F, 6.0F, 12.0F), offset(0.0F, 24.0F, 0.0F));
 
-        base.addOrReplaceChild("back_lid", CubeListBuilder.create().texOffs(0, 29).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 1.0F, 7.0F), PartPose.offset(0.0F, -8.0F, 0.0F));
+        base.addOrReplaceChild("front_lid", create()
+                .texOffs(7, 47).addBox(-5.0F, 0.0F, -7.0F, 10.0F, 1.0F, 7.0F), offset(0.0F, -8.0F, 0.0F));
 
-        base.addOrReplaceChild("front_lid", CubeListBuilder.create().texOffs(0, 21).addBox(-5.0F, 0.0F, -7.0F, 10.0F, 1.0F, 7.0F), PartPose.offset(0.0F, -8.0F, 0.0F));
+        base.addOrReplaceChild("back_lid", create()
+                .texOffs(7, 39).addBox(-5.0F, 0.0F, 0.0F, 10.0F, 1.0F, 7.0F), offset(0.0F, -8.0F, 0.0F));
 
-        base.addOrReplaceChild("back_handle", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(5.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F).mirror(false)
-                .texOffs(0, 0).addBox(-6.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F)
-                .texOffs(34, 0).addBox(-5.0F, -7.5F, -0.5F, 10.0F, 1.0F, 1.0F), PartPose.offset(0.0F, -6.5F, 1.5F));
+        base.addOrReplaceChild("front_handle", create()
+                .texOffs(51, 46).addBox("left", -6.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F).mirror()
+                .texOffs(51, 46).addBox("right", 5.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F)
+                .texOffs(42, 44).addBox("top", -5.0F, -7.5F, -0.5F, 10.0F, 1.0F, 1.0F), offset(0.0F, -6.5F, -1.5F));
 
-        base.addOrReplaceChild("front_handle", CubeListBuilder.create().texOffs(0, 0).mirror().addBox(5.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F).mirror(false)
-                .texOffs(0, 0).addBox(-6.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F)
-                .texOffs(34, 0).mirror().addBox(-5.0F, -7.5F, -0.5F, 10.0F, 1.0F, 1.0F).mirror(false), PartPose.offset(0.0F, -6.5F, -1.5F));
+        base.addOrReplaceChild("back_handle", create()
+                .texOffs(51, 46).addBox("left", -6.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F).mirror()
+                .texOffs(51, 46).addBox("right", 5.0F, -7.5F, -0.5F, 1.0F, 8.0F, 1.0F).mirror(false)
+                .texOffs(42, 44).addBox("top", -5.0F, -7.5F, -0.5F, 10.0F, 1.0F, 1.0F), offset(0.0F, -6.5F, 1.5F));
+        //@formatter:on
 
         return LayerDefinition.create(mesh, 64, 64);
     }
@@ -74,5 +82,10 @@ public class BasketModel<E extends BasketEntity> extends EntityModel<E> {
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
         base.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+    }
+
+    public ResourceLocation getTextureLocation(BasketEntity basket) {
+        // Variants...
+        return TEXTURE;
     }
 }

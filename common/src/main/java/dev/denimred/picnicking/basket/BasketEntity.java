@@ -61,7 +61,7 @@ public class BasketEntity extends Entity implements WrappedMenuContainer {
     }
 
     public static EntityType.Builder<BasketEntity> createType() {
-        return EntityType.Builder.of(BasketEntity::new, MobCategory.MISC).sized(0.875f, 0.5f);
+        return EntityType.Builder.of(BasketEntity::new, MobCategory.MISC).sized(0.75f, 0.5f);
     }
 
     public static InteractionResult place(UseOnContext context) {
@@ -70,7 +70,7 @@ public class BasketEntity extends Entity implements WrappedMenuContainer {
         BasketEntity basket = PicnicEntityTypes.PICNIC_BASKET.get().create(level);
         if (basket == null) return InteractionResult.FAIL;
         // Get a position that won't result in the basket being inside a block
-        Vec3 freePos = getFreeBasketPos(level, pos, basket);
+        Vec3 freePos = findFreeBasketPos(basket, level, pos);
         if (freePos == null) return InteractionResult.FAIL;
         // All placement checks passed, so assume success on the client
         if (level.isClientSide) return InteractionResult.SUCCESS;
@@ -86,15 +86,18 @@ public class BasketEntity extends Entity implements WrappedMenuContainer {
         return InteractionResult.CONSUME;
     }
 
-    public static Vec3 getFreeBasketPos(Level level, Vec3 pos, Entity basket) {
+    @Nullable
+    public static Vec3 findFreeBasketPos(Entity basket, Level level, Vec3 pos) {
         EntityDimensions dimensions = basket.getDimensions(Pose.STANDING);
         double width = dimensions.width;
         double height = dimensions.height;
-        double adjustedWidth = Math.max(0.0F, width) + 1.0E-6;
-        double adjustedHeight = Math.max(0.0F, height) + 1.0E-6;
-        VoxelShape voxelShape = Shapes.create(AABB.ofSize(pos, adjustedWidth, adjustedHeight, adjustedWidth));
-        Optional<Vec3> freePos = level.findFreePosition(basket, voxelShape, pos, width, height, width);
-        return freePos.map(v -> new Vec3(v.x, Math.min(v.y, pos.y), v.z)).orElse(null);
+        double verticalOffset = height / 2.0;
+        Vec3 offsetPos = pos.add(0.0, verticalOffset, 0.0);
+        double adjustedWidth = Math.max(0.0, width) + 1.0E-6;
+        double adjustedHeight = Math.max(0.0, height) + 1.0E-6;
+        VoxelShape shape = Shapes.create(AABB.ofSize(offsetPos, adjustedWidth, adjustedHeight, adjustedWidth));
+        Optional<Vec3> freePos = level.findFreePosition(basket, shape, offsetPos, width, height, width);
+        return freePos.map(vec -> vec.add(0.0, -verticalOffset, 0.0)).orElse(null);
     }
 
     public void loadFromItem(ItemStack stack) {
@@ -187,13 +190,23 @@ public class BasketEntity extends Entity implements WrappedMenuContainer {
     }
 
     @Override
+    public boolean canCollideWith(Entity entity) {
+        return (entity.canBeCollidedWith() || entity.isPushable()) && !isPassengerOfSameVehicle(entity);
+    }
+
+    @Override
+    public boolean canBeCollidedWith() {
+        return true; // Can act as a physical obstacle (much like a sort of mobile block)
+    }
+
+    @Override
     protected MovementEmission getMovementEmission() {
         return MovementEmission.NONE; // It's a basket, don't emit sounds or events for skulks/wardens
     }
 
     @Override
     protected float getEyeHeight(Pose pose, EntityDimensions dimensions) {
-        return dimensions.height; // Eye height affects getFreeBasketPos, so return the full height for desired effect
+        return dimensions.height;
     }
 
     @Override
@@ -241,7 +254,7 @@ public class BasketEntity extends Entity implements WrappedMenuContainer {
     private final EntityContainerOpenersCounter<?> openersCounter = new EntityContainerOpenersCounter<>(this) {
         @Override
         protected void onOpen(@Nullable Player player) {
-            if (player != null) parts.openFacingLid(player);
+            if (player != null) parts.openLidFor(player);
             playOpenSound();
         }
 

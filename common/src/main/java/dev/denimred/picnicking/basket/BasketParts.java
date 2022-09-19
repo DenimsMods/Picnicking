@@ -13,7 +13,7 @@ public class BasketParts {
         this.basket = basket;
     }
 
-    public void openFacingLid(Entity player) {
+    public void openLidFor(Entity player) {
         // One of the lids is already opened; don't bother
         if (frontLid.isOpen() || backLid.isOpen()) return;
         float basketView = basket.getViewYRot(1.0f);
